@@ -377,22 +377,22 @@ class Toolpath {
         },
         // G54..59: Coordinate System Select
         'G54': () => {
-            set_wcs('G54');
+            this.set_wcs('G54');
         },
         'G55': () => {
-            set_wcs('G55');
+            this.set_wcs('G55');
         },
         'G56': () => {
-            set_wcs('G56');
+            this.set_wcs('G56');
         },
         'G57': () => {
-            set_wcs('G57');
+            this.set_wcs('G57');
         },
         'G58': () => {
-            set_wcs('G58');
+            this.set_wcs('G58');
         },
         'G59': () => {
-            set_wcs('G59');
+            this.set_wcs('G59');
         },
         // G80: Cancel Canned Cycle
         'G80': () => {
