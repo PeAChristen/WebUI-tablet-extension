@@ -144,7 +144,7 @@ const drawMachineBounds = () => {
     const wcoY = MPOS[1] - WPOS[1];   
     //Current position of Z and A axes 
     const wcoZ = MPOS[2] - WPOS[2] - 500; //Offset to visualize the Z axis properly
-    const wcoA = MPOS[3] - WPOS[3]; //Offset to visualize the A axis properly
+    const wcoA = MPOS[3] - WPOS[3]; 
 
     const xMin = (xHomeDir == 1) ? xHomePos - xMaxTravel : xHomePos;
     const yMin = (yHomeDir == 1) ? yHomePos - yMaxTravel : yHomePos;
@@ -162,7 +162,8 @@ const drawMachineBounds = () => {
     const p1 = projection({ x: xMin - wcoX, y: yMax - wcoY, z: 0 });
     const p2 = projection({ x: xMax - wcoX, y: yMax - wcoY, z: 0 });
     const p3 = projection({ x: xMax - wcoX, y: yMin - wcoY, z: 0 });
-    // Added support for Z and A axes bounding box
+    //Added support for Z and A axes bounding box
+    //TODO: Add z offset to visualize za-plane according to a hot wire cutter
     const p4 = projection({ x: zMin - wcoZ, y: aMin - wcoA, z: 0 });
     const p5 = projection({ x: zMin - wcoZ, y: aMax - wcoA, z: 0 });
     const p6 = projection({ x: zMax - wcoZ, y: aMax - wcoA, z: 0 });
