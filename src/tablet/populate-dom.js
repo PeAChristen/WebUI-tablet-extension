@@ -199,7 +199,7 @@ const attachApp = (container) => {
                         element('div', 'tablet-dropdown-menu', 'menu', [
                             mi("Fullscreen", toggleFullscreen, typeof toggleFullscreen === 'function'),
                             mi("Homing", menuHomeAll),
-                            mi("Home A", menuHomeA),
+                            //mi("Home A", menuHomeA),
                             mi("Spindle Off", menuSpindleOff),
                             mi("Unlock", menuUnlock),
                             mi("Reset", menuReset),
