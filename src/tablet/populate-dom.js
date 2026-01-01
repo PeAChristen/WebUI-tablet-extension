@@ -216,10 +216,10 @@ const attachApp = (container) => {
                         jog_control('jog-y-plus', 'Y+'),
                         col(2, ""),
                         jog_control('jog-z-plus', 'Z+'),
-                        jog_distance('jog00', '0.001'),
-                        jog_distance('jog01', '0.01'),
-                        jog_distance('jog02', '0.1'),
-                        jog_distance('jog03', '1')
+                        //jog_distance('jog00', '0.001'),
+                        //jog_distance('jog01', '0.01'),
+                        //jog_distance('jog02', '0.1'),
+                        //jog_distance('jog03', '1')
                     ]),
 
                     columns('', 'jog-row', [
@@ -247,10 +247,10 @@ const attachApp = (container) => {
                             ]),
                         ]),
 
-                        jog_distance('jog10', '0.003'),
-                        jog_distance('jog11', '0.03'),
-                        jog_distance('jog12', '0.3'),
-                        jog_distance('jog13', '3')
+                        //jog_distance('jog10', '0.003'),
+                        //jog_distance('jog11', '0.03'),
+                        //jog_distance('jog12', '0.3'),
+                        //jog_distance('jog13', '3')
 
                     ]),
 
@@ -259,10 +259,10 @@ const attachApp = (container) => {
                         jog_control('jog-y-minus', 'Y-'),
                         div('emptyLRHC', 'col-tablet col-2 info-button', ""),
                         jog_control('jog-z-minus', 'Z-'),
-                        jog_distance('jog20', '0.005'),
-                        jog_distance('jog21', '0.05'),
-                        jog_distance('jog22', '0.5'),
-                        jog_distance('jog23', '5')
+                        //jog_distance('jog20', '0.005'),
+                        //jog_distance('jog21', '0.05'),
+                        //jog_distance('jog22', '0.5'),
+                        //jog_distance('jog23', '5')
                     ]),
                 ]),
                 div('overrides', '', [
