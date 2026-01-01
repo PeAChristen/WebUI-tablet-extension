@@ -227,35 +227,23 @@ const attachApp = (container) => {
                         jog_control('jog-x-minus', 'X-'),
                         col(2, ''),
                         jog_control('jog-x-plus', 'X+'),
-                        div('emptyLRHC', 'col-tablet col-2 info-button', ""),
+                        jog_control('jog-a-minus', 'A-'),
                         div('jog-distance-container', 'col-tablet col-2', [
                             select('jog-distance', 'btn-tablet jog-selector', null, [
-                                option("0.00025"),
-                                option("0.0005"),
-                                option("0.001"),
-                                option("0.003"),
-                                option("0.005"),
-                                option("0.01"),
-                                option("0.03"),
-                                option("0.05"),
-                                option("0.1"),
-                                option("0.3"),
-                                option("0.5"),
                                 option("1"),
-                                option("3"),
                                 option("5"),
                                 option("10"),
-                                option("30")
+                                option("100")
                             ]),
                         ]),
-
+                        jog_control('jog-a-plus', 'A+'),
                         //jog_distance('jog10', '0.003'),
                         //jog_distance('jog11', '0.03'),
                         //jog_distance('jog12', '0.3'),
                         //jog_distance('jog13', '3')
 
                     ]),
-
+                    
                     columns('', 'jog-row', [
                         div('emptyLLHC', 'col-tablet col-2 info-button', ""),
                         jog_control('jog-y-minus', 'Y-'),

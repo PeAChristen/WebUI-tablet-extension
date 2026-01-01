@@ -192,6 +192,12 @@ const sendMove = (cmd) => {
         },
         'Z+': () => {
             jog({ Z: distance });
+        },
+        'A-': () => {
+            jog({ A: -distance });
+        },
+        'A+': () => {
+            jog({ A: distance });
         }
     }[cmd];
 
@@ -221,6 +227,25 @@ const getDollarResult = (result) => {
         return;
     case '$/axes/y/homing/positive_direction':
         displayer.setYDir(value);
+        return;
+    //Add support for Z and A axes
+    case '$/axes/z/max_travel_mm':
+        displayer.setZTravel(parseFloat(value));
+        return;
+    case '$/axes/a/max_travel_mm':
+        displayer.setATravel(parseFloat(value));
+        return;
+    case '$/axes/z/homing/mpos_mm':
+        displayer.setZHome(parseFloat(value));
+        return;
+    case '$/axes/a/homing/mpos_mm':
+        displayer.setAHome(parseFloat(value));
+        return;
+    case '$/axes/z/homing/positive_direction':
+        displayer.setZDir(value);
+        return;
+    case '$/axes/a/homing/positive_direction':
+        displayer.setADir(value);
         return;
     }
 }
@@ -695,6 +720,15 @@ const askMachineBbox = () => {
     askAxis("$/axes/y/homing/mpos_mm");
     askAxis("$/axes/y/homing/positive_direction");
     askAxis("$/axes/y/max_travel_mm");
+
+    //Add support for Z and A axes
+    askAxis("$/axes/z/homing/mpos_mm");
+    askAxis("$/axes/z/homing/positive_direction");
+    askAxis("$/axes/z/max_travel_mm");
+
+    askAxis("$/axes/a/homing/mpos_mm");
+    askAxis("$/axes/a/homing/positive_direction");
+    askAxis("$/axes/a/max_travel_mm");
 
     machineBboxAsked = true;
 }

@@ -1,5 +1,8 @@
 // Display the XY-plane projection of a GCode toolpath on a 2D canvas
 
+//TODO: Add the AZ-plane projection of a GCode toolpath on a 2D canvas
+//Start with adding the bounding box for the A and Z axis
+
 const root = window;
 
 let canvas;
@@ -19,14 +22,21 @@ let cameraAngle = 0;
 
 let haveBoundary = true;
 
+//Added support for Z and A axes
 let xMaxTravel = 1000;
 let yMaxTravel = 1000;
+let zMaxTravel = 1000;
+let aMaxTravel = 1000;
 
 let xHomePos = 0;
 let yHomePos = 0;
+let zHomePos = 0;
+let aHomePos = 0;
 
 let xHomeDir = 1;
 let yHomeDir = 1;
+let zHomeDir = 1;
+let aHomeDir = 1;
 
 let tpUnits = 'G21';
 
@@ -131,23 +141,43 @@ const drawMachineBounds = () => {
     }
 
     const wcoX = MPOS[0] - WPOS[0];
-    const wcoY = MPOS[1] - WPOS[1];
+    const wcoY = MPOS[1] - WPOS[1];   
+    //Current position of Z and A axes 
+    const wcoZ = MPOS[2] - WPOS[2] - 500; //Offset to visualize the Z axis properly
+    const wcoA = MPOS[3] - WPOS[3]; //Offset to visualize the A axis properly
 
     const xMin = (xHomeDir == 1) ? xHomePos - xMaxTravel : xHomePos;
     const yMin = (yHomeDir == 1) ? yHomePos - yMaxTravel : yHomePos;
+    //Added support for Z and A axes
+    const zMin = (zHomeDir == 1) ? zHomePos - zMaxTravel : zHomePos;
+    const aMin = (aHomeDir == 1) ? aHomePos - aMaxTravel : aHomePos;
 
     const xMax = xMin + xMaxTravel;
     const yMax = yMin + yMaxTravel;
+    //Added support for Z and A axes
+    const zMax = zMin + zMaxTravel;
+    const aMax = aMin + aMaxTravel;
 
     const p0 = projection({ x: xMin - wcoX, y: yMin - wcoY, z: 0 });
     const p1 = projection({ x: xMin - wcoX, y: yMax - wcoY, z: 0 });
     const p2 = projection({ x: xMax - wcoX, y: yMax - wcoY, z: 0 });
     const p3 = projection({ x: xMax - wcoX, y: yMin - wcoY, z: 0 });
+    // Added support for Z and A axes bounding box
+    const p4 = projection({ x: zMin - wcoZ, y: aMin - wcoA, z: 0 });
+    const p5 = projection({ x: zMin - wcoZ, y: aMax - wcoA, z: 0 });
+    const p6 = projection({ x: zMax - wcoZ, y: aMax - wcoA, z: 0 });
+    const p7 = projection({ x: zMax - wcoZ, y: aMin - wcoA, z: 0 });
 
     tpBbox.min.x = Math.min(tpBbox.min.x, p0.x, p1.x);
     tpBbox.min.y = Math.min(tpBbox.min.y, p0.y, p3.y);
     tpBbox.max.x = Math.max(tpBbox.max.x, p2.x, p3.x);
     tpBbox.max.y = Math.max(tpBbox.max.y, p1.y, p2.y);
+    // Added support for Z and A axes bounding box
+    tpBbox.min.z = Math.min(tpBbox.min.z, p4.x, p5.x);
+    tpBbox.min.a = Math.min(tpBbox.min.a, p4.y, p7.y);
+    tpBbox.max.z = Math.max(tpBbox.max.z, p6.x, p7.x);
+    tpBbox.max.a = Math.max(tpBbox.max.a, p5.y, p6.y);
+
     bboxIsSet = true;
 
     tp.beginPath();
@@ -157,6 +187,17 @@ const drawMachineBounds = () => {
     tp.lineTo(p3.x, p3.y);
     tp.lineTo(p0.x, p0.y);
     tp.strokeStyle = "green";
+    tp.stroke();
+
+    // Added support for Z and A axes bounding box
+    tp.beginPath();
+    tp.moveTo(p4.x, p4.y);
+    tp.lineTo(p5.x, p5.y);
+    tp.lineTo(p6.x, p6.y);
+    tp.lineTo(p7.x, p7.y);
+    tp.lineTo(p4.x, p4.y);
+
+    tp.strokeStyle = "red";
     tp.stroke();
 
 }
@@ -558,6 +599,28 @@ class ToolpathDisplayer {
     setYDir = (yDir) => {
         yHomeDir = (yDir == "true") ? 1 : -1;
     }
+
+    //Add support for Z and A axes
+
+    setZTravel = (maxTravelZ) => {
+        zMaxTravel = maxTravelZ;
+    }
+    setATravel = (maxTravelA) => {
+        aMaxTravel = maxTravelA;
+    }
+    setZHome = (zHomeInternal) => {
+        zHomePos = zHomeInternal;
+    }
+    setAHome = (zHomeInternal) => {
+        zHomePos = zHomeInternal;
+    }
+    setZDir = (zDir) => {
+        zHomeDir = (zDir == "true") ? 1 : -1;
+    }
+    setADir = (aDir) => {
+        aHomeDir = (aDir == "true") ? 1 : -1;
+    }
+
     cycleCameraAngle = (gcode, modal, position) => {
         cameraAngle = cameraAngle + 1;
         if (cameraAngle > 3) {
