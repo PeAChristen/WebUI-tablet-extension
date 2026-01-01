@@ -215,6 +215,7 @@ const attachApp = (container) => {
                         div('distance', 'col-tablet col-2 info-button', ""),
                         jog_control('jog-y-plus', 'Y+'),
                         col(2, ""),
+                        div('emptyLRHC', 'col-tablet col-2 info-button', ""),
                         jog_control('jog-z-plus', 'Z+'),
                         //jog_distance('jog00', '0.001'),
                         //jog_distance('jog01', '0.01'),
@@ -226,6 +227,7 @@ const attachApp = (container) => {
                         jog_control('jog-x-minus', 'X-'),
                         col(2, ''),
                         jog_control('jog-x-plus', 'X+'),
+                        div('emptyLRHC', 'col-tablet col-2 info-button', ""),
                         div('jog-distance-container', 'col-tablet col-2', [
                             select('jog-distance', 'btn-tablet jog-selector', null, [
                                 option("0.00025"),
@@ -257,6 +259,7 @@ const attachApp = (container) => {
                     columns('', 'jog-row', [
                         div('emptyLLHC', 'col-tablet col-2 info-button', ""),
                         jog_control('jog-y-minus', 'Y-'),
+                        div('emptyLRHC', 'col-tablet col-2 info-button', ""),
                         div('emptyLRHC', 'col-tablet col-2 info-button', ""),
                         jog_control('jog-z-minus', 'Z-'),
                         //jog_distance('jog20', '0.005'),
