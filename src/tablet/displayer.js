@@ -627,7 +627,7 @@ class ToolpathDisplayer {
         if (cameraAngle > 3) {
             cameraAngle = 0;
         }
-
+        //TODO: figure out if displayer. should be this.
         displayer.showToolpath(gcode, modal, position);
     }
 }
